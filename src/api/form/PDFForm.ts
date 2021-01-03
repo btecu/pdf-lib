@@ -583,6 +583,9 @@ export default class PDFForm {
         page.node.setXObject(PDFName.of(xObjectKey), refOrDict);
 
         const rectangle = widget.getRectangle();
+        if (rectangle.height < 0 && field instanceof PDFCheckBox) {
+          rectangle.y += rectangle.height;
+        }
 
         const operators = [
           pushGraphicsState(),
